@@ -8,7 +8,7 @@ const taskRoutes = require('./routes/task.routes');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.use(cors({ origin: 'https://task-manager-frontend-phi.vercel.app' }));
+app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
@@ -20,6 +20,10 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 // Routes
 app.use('/api', userRoutes);
 app.use('/api', taskRoutes);
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the Task Manager API');
+});
 
 // Start Server
 
